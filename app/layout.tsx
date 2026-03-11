@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Serif, Inter, Mona_Sans } from "next/font/google";
-import "./globals.css";
-import { cn } from "@/lib/utils";
+import { IBM_Plex_Serif, Mona_Sans } from "next/font/google";
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
+import Navbar from "@/components/navbar";
+import "./globals.css";
 
 const ibmPlexSerif = IBM_Plex_Serif({
   variable: '--font-ibm-plex-serif',
@@ -29,10 +28,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("font-sans", inter.variable)}>
+    <html lang="en">
       <body
         className={`${ibmPlexSerif.variable} ${monaSans.variable} relative font-sans antialiased`}
       >
+        <Navbar />
         {children}
       </body>
     </html>
