@@ -1,9 +1,11 @@
 'use client'
 
+import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
+import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 const navItems = [
@@ -22,17 +24,38 @@ export const Navbar = () => {
           <span className="logo-text">Bookfied</span>
         </Link>
 
-        <nav className="w-fit flex gap-7 items-center">
-          {navItems.map((item) => {
-            const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
+        <div className="flex items-center gap-4">
+          <nav className="w-fit flex gap-7 items-center">
+            {navItems.map((item) => {
+              const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
 
-            return (
-              <Link key={item.label} href={item.href} className={cn('nav-link-base', isActive ? 'nav-link-active' : 'text-black hover:opacity-70')}>
-                {item.label}
-              </Link>
-            )
-          })}
-        </nav>
+              return (
+                <Link key={item.label} href={item.href} className={cn('nav-link-base', isActive ? 'nav-link-active' : 'text-black hover:opacity-70')}>
+                  {item.label}
+                </Link>
+              )
+            })}
+          </nav>
+
+          <div className="flex items-center gap-2">
+            <Show when="signed-out">
+              <SignInButton mode="modal">
+                <Button variant="outline" size="sm">
+                  Sign in
+                </Button>
+              </SignInButton>
+              <SignUpButton mode="modal">
+                <Button size="sm">
+                  Sign up
+                </Button>
+              </SignUpButton>
+            </Show>
+
+            <Show when="signed-in">
+              <UserButton />
+            </Show>
+          </div>
+        </div>
       </div>
     </header>
   )
