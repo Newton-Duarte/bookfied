@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { IBM_Plex_Serif, Mona_Sans } from "next/font/google";
 
 import Navbar from "@/components/navbar";
+import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
 const ibmPlexSerif = IBM_Plex_Serif({
@@ -37,6 +38,7 @@ export default function RootLayout({
           <Navbar />
           {children}
         </ClerkProvider>
+        <Toaster />
       </body>
     </html>
   );
